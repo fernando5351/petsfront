@@ -1,0 +1,109 @@
+.container {
+  width: 100%;
+  height: 87vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.card-user {
+  width: 30%;
+  height: 80%;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid rgba(0, 0, 0, 0.32);
+  // border-right: 2px solid rgba(209, 213, 225, 0.75);
+}
+
+.user {
+  width: 75%;
+  height: 85%;
+  background: rgba(53, 55, 85, 1);
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.icon {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  color: #fff;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rol h4 {
+  font-size: 18px;
+}
+
+.rol span {
+  font-size: 16px;
+}
+
+.options {
+  width: 60%;
+  height: 80%;
+  margin: 20px;
+  display: flex;
+}
+
+.options {
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+}
+
+.option {
+  width: 30%;
+  height: 40%;
+  background: rgba(53, 55, 85, 1);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10%;
+  margin: 10px;
+  box-shadow: 0px  15px 20px rgba(61, 69, 100, 0.36);
+}
+
+.option .img {
+  height: 70%;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img img {
+  height: 80%;
+  width: 90%;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 20px;
+  color: #fff;
+  text-decoration: none;
+  margin: 5px;
+}
+
+a:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px;
+  cursor: pointer;
+}
