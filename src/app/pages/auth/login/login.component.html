@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="logo">
+
+  </div>
+  <div class="content">
+    <div class="title">
+      <h2>¡Guau!</h2>
+      <h1>Entra a censar</h1>
+    </div>
+    <form (ngSubmit)="onSubmit()" class="user-form">
+      <div class="input-container">
+        <input type="email" id="email" [(ngModel)]="formData.email" name="email" required />
+      </div>
+      <div class="input-container">
+        <input type="text" id="password" [(ngModel)]="formData.password" name="password" required />
+      </div>
+      <div class="container-options">
+        <div class="options">
+          <input class="check" type="checkbox" name="terms" id="terms"/>
+          Recuerdame
+        </div>
+        <a>¿Olvidaste tu contraseña?</a>
+      </div>
+      <div class="button-container">
+        <button>
+          Iniciar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

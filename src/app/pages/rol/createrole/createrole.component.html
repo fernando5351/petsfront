@@ -1,17 +1,23 @@
 <div class="container">
-  <form class="content">
+  <form class="content" (ngSubmit)="onSubmit()">
     <div class="slide">
       <div class="name-container">
-        Rol:
-        <input type="text" placeholder="Administrador" >
+        Nombre:
+        <input type="text" placeholder="Ej: Administrador" [(ngModel)]="formData.name" name="name" required>
       </div>
       <div class="name-container">
-        Estado
-        <select name="status" id="status">
-          <option value="" disabled selected>Estado</option>
-          <option value="true">Activo</option>
-          <option value="false">Inactivo</option>
-        </select>
+        <div class="switch-order-container">
+          Estado:
+          <label class="switch">
+            <input type="checkbox" [checked]="true" (change)="changeStatus()">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="name-container">
+        <button>
+          Crear
+        </button>
       </div>
     </div>
     <div class="permissions">
@@ -27,7 +33,7 @@
             [attr.aria-expanded]="accordionItem.expanded"
             [attr.aria-controls]="'accordion-body-' + index">
             <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-              {{ item.accessName }}
+              {{ item.name }}
               <span class="example-accordion-item-description">
                 Click para {{ accordionItem.expanded ? 'cerrar' : 'ver' }}
               </span>

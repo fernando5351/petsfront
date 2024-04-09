@@ -30,16 +30,13 @@
   flex-wrap: wrap;
 }
 
-
-
 .name-container {
-  margin-top: 1rem;
   font-size: 1.5rem;
   color: black;
   width: 60%;
 }
 
-.name-container input, select, option{
+input, select, option, button{
   width: 100%;
   height: 40px;
   border: none;
@@ -47,6 +44,13 @@
   border-radius: 10px;
   padding-left: .5rem;
   font-weight: bold;
+}
+
+button {
+  background: #2196F3;
+  font-size: 23px;
+  font-weight: 300;
+  cursor: pointer;
 }
 
 .permissions {
