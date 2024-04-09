@@ -13,7 +13,8 @@ export const AuthGuard = () => {
     if (authService.getToken() !== null) {
       return true;
     } else {
-      return router.createUrlTree(['login']); // Devuelve la UrlTree para redirigir al usuario a la página de inicio de sesión
+      router.navigate(['login']);
+      return false;
     }
   };
 };
