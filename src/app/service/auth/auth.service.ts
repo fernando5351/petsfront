@@ -18,7 +18,7 @@ export class AuthService {
     private router: Router,
     private loading: LoadingService,
     private http: HttpClient
-  ) { }
+  ) {}
 
   login(dto: loginDto) {
     this.loading.start();
@@ -43,11 +43,11 @@ export class AuthService {
   getToken() {
     if (localStorage.getItem('user')) {
       try {
-        const token: auth = JSON.parse(localStorage.getItem('user')!);
-        return token;
+        const storage: auth = JSON.parse(localStorage.getItem('user')!);
+        return storage.token;
       } catch (error) {
         console.log("Parse error", error);
-        return null;
+        throw `Token no parseado correctamente ${error}`;
       }
     } else {
       return null;
