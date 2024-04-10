@@ -1,1 +1,93 @@
-<p>updaterole works!</p>
+<div class="container">
+  <form class="content" (ngSubmit)="onSubmit()">
+    <div class="slide">
+      <div class="name-container">
+        Nombre:
+        <input type="text" [value]="role.name" placeholder="Ej: Administrador" [(ngModel)]="formData.name" name="name" required>
+      </div>
+      <div class="name-container">
+        <div class="switch-order-container">
+          Estado:
+          <label class="switch">
+            <input type="checkbox" [checked]="role.status ? true: false" (change)="changeStatus()">
+            <span class="slider"></span>
+          </label>
+        </div>
+      </div>
+      <div class="name-container">
+        <button>
+          Actualizar
+        </button>
+      </div>
+    </div>
+    <div class="permissions">
+      <cdk-accordion class="example-accordion">
+        @for (item of items; track item; let index = $index) {
+          <cdk-accordion-item
+
+            #accordionItem="cdkAccordionItem"
+            class="example-accordion-item"
+            role="button"
+            tabindex="0"
+            [attr.id]="'accordion-header-' + index"
+            [attr.aria-expanded]="accordionItem.expanded"
+            [attr.aria-controls]="'accordion-body-' + index">
+            <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+              {{ item.name }}
+              <span class="example-accordion-item-description">
+                Click para {{ accordionItem.expanded ? 'cerrar' : 'ver' }}
+              </span>
+            </div>
+            <div
+              class="example-accordion-item-body"
+              role="region"
+              [style.display]="accordionItem.expanded ? '' : 'none'"
+              [attr.id]="'accordion-body-' + index"
+              [attr.aria-labelledby]="'accordion-header-' + index">
+              <div class="switch-content">
+                  <div class="check-content">
+                    <div class="switch-order">
+                      Puede Crear
+                      <label class="switch">
+                        <input type="checkbox" [checked]="item.permissions.canCreate ? true: false" (change)="toggle('canCreate', item)">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="check-content">
+                    <div class="switch-order">
+                      Puede Ver
+                      <label class="switch">
+                        <input type="checkbox" [checked]="item.permissions.canRead ? true: false" (change)="toggle('canRead', item)">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="check-content">
+                    <div class="switch-order">
+                      Puede Editar
+                      <label class="switch">
+                        <input type="checkbox" [checked]="item.permissions.canUpdate ? true: false" (change)="toggle('canUpdate', item)">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="check-content">
+                    <div class="switch-order">
+                      Puede Eliminar
+                      <label class="switch">
+                        <input type="checkbox" [checked]="item.permissions.canDelete ? true: false" (change)="toggle('canDelete', item)">
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </cdk-accordion-item>
+        }
+      </cdk-accordion>
+
+
+    </div>
+  </form>
+</div>

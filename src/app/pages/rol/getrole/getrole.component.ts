@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { RoleComponent } from '../../../components/role/role.component';
 import { Role } from '../../../interfaces/role.interface';
 import { RolService } from '../../../service/rol/rol.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-getrole',
@@ -37,7 +38,7 @@ export class GetroleComponent implements OnInit {
   ){}
 
   ngOnInit(): void {
-
+    this.loadRoles();
   }
 
   create() {
@@ -47,12 +48,15 @@ export class GetroleComponent implements OnInit {
   loadRoles(){
     this.rolService.getRol().subscribe({
       next: (response) => {
-        console.log(response);
-
         this.roles = response.data;
       },
       error: (error) => {
-        alert(error);
+        Swal.fire({
+          title: 'error',
+          text: error.message,
+          icon: 'error',
+          position: 'top-end'
+        })
       }
     })
   }

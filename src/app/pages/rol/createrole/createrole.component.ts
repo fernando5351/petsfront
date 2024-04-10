@@ -3,6 +3,10 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { FormsModule } from '@angular/forms';
 import { RolService } from '../../../service/rol/rol.service';
 import { CreateRol, Role } from '../../../interfaces/role.interface';
+import { PermissionService } from '../../../service/permission/permission.service';
+import { CreatePemission } from '../../../interfaces/role.permissions.interface';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-createrole',
@@ -20,6 +24,7 @@ export class CreateroleComponent {
     { name: 'Usuarios', accessName: 'user', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
     { name: 'Permisos', accessName: 'permissions', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
     { name: 'Animales', accessName: 'pet', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
+    { name: 'Direcciones', accessName: 'direction', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
     { name: 'Dueños', accessName: 'owner', permissions: { canCreate: true, canRead: true, canUpdate: true, canDelete: true } },
     { name: 'Especies', accessName: 'specie', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
   ];
@@ -27,16 +32,13 @@ export class CreateroleComponent {
   status: boolean = true;
 
   constructor(
-    private rolService: RolService
+    private rolService: RolService,
+    private permissionService: PermissionService,
+    private router: Router
   ) {}
 
   toggle(permission: keyof typeof item.permissions, item: any) {
     item.permissions[permission] = !item.permissions[permission];
-    console.log(item);
-  }
-
-  delete(){
-    alert('me vas a eliminar? :(')
   }
 
   changeStatus() {
@@ -55,6 +57,24 @@ export class CreateroleComponent {
     this.rolService.createRol(role).subscribe({
       next: (response) => {
         console.log(response);
+        for (let i = 0; i < this.items.length; i++) {
+          const item = this.items[i];
+
+          const dto: CreatePemission = {
+            accessName: item.accessName,
+            canCreate: item.permissions.canCreate,
+            canUpdate: item.permissions.canUpdate,
+            canDelete: item.permissions.canDelete,
+            canRead: item.permissions.canRead,
+            roleId: response.data.id
+          }
+          this.permissionService.createPermission(dto).subscribe({
+            next: (response) => {
+              console.log(response);
+              this.router.navigate(['rol']);
+            }
+          });
+        }
       },
       error: (error) => {
         console.log(error);

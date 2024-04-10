@@ -5,7 +5,7 @@ import { UpdateroleComponent } from './updaterole/updaterole.component';
 
 export const roleRoutes: Routes = [
   { path: 'create', component: CreateroleComponent },
-  { path: 'update', component: UpdateroleComponent },
+  { path: 'update/:id', component: UpdateroleComponent },
   { path: 'list', component: GetroleComponent },
   { path: '', redirectTo: 'list', pathMatch: 'full' },
   { path: '**', redirectTo: 'list' }

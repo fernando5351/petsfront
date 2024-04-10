@@ -43,7 +43,7 @@ export class RolService {
 
   getRolById(id: number) {
     this.loading.start();
-    return this.http.get<Role>(`${this.url}/${id}`).pipe(
+    return this.http.get<GetRol>(`${this.url}/${id}`).pipe(
         finalize(() => {
             this.loading.stop();
         })

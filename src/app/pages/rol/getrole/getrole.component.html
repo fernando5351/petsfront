@@ -10,19 +10,13 @@
       <input type="search" placeholder="Search..." />
     </div>
     <div class="list">
-      @for (rol of roles; track rol.id) {
-        <app-role [role]="rol"></app-role>
-        <app-role [role]="rol"></app-role>
-      }
-      <!-- @for (rol of roles; track rol.id) {
-        @if (rol.id == 0) {
-          No hay roles
-        } @else {
-          @for (rol of roles; track rol.id) {
-            <app-role [role]="rol"></app-role>
-          }
+      @if (roles.length === 0) {
+        <p>No hay roles</p>
+      } @else {
+        @for (rol of roles; track rol.id) {
+          <app-role [role]="rol"></app-role>
         }
-      } -->
+      }
     </div>
   </div>
 </div>

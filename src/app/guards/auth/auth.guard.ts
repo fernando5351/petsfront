@@ -6,10 +6,9 @@ export const AuthGuard = () => {
   return (route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree => {
     const authService = inject(AuthService);
     const router = inject(Router);
-    console.log(authService.getToken());
-    console.log('soy canActivate');
 
-    if (authService.getToken() !== null) {
+    const token = authService.getToken();
+    if (token) {
       return true;
     } else {
       router.navigate(['login']);
