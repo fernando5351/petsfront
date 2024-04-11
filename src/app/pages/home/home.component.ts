@@ -40,4 +40,8 @@ export class HomeComponent implements OnInit{
       })
     }
   }
+
+  goTo(url: string) {
+    this.router.navigate([url]);
+  }
 }

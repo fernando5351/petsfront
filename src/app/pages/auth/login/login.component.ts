@@ -37,7 +37,6 @@ export class LoginComponent {
       next: (response) => {
         this.authService.saveToken(response);
         this.router.navigate(['home'])
-
       },
       error: (error) => {
         alert(error.message);
