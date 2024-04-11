@@ -28,7 +28,6 @@ export class LoginComponent {
       email: '',
       password: ''
     }
-    console.log(auth);
 
     if (this.formData.email !== '' && this.formData.password !== '') {
       auth.email = this.formData.email;
@@ -37,9 +36,7 @@ export class LoginComponent {
     this.authService.login(auth).subscribe({
       next: (response) => {
         this.authService.saveToken(response);
-        console.log(response);
         this.router.navigate(['home'])
-        console.log('luego de ir a home');
 
       },
       error: (error) => {

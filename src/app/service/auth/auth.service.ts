@@ -1,24 +1,30 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { LoadingService } from '../loading/loading.service';
 import { finalize } from 'rxjs';
-import { GetOneUser, User, auth, loginDto } from '../../interfaces/user.interface';
+import { GetOneUser, auth, loginDto } from '../../interfaces/user.interface';
+import { DOCUMENT } from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 
 export class AuthService {
 
   private url = `${environment.apiUrl}/auth`;
+ // private localStorage: Storage | undefined = undefined;
 
   constructor(
     private router: Router,
     private loading: LoadingService,
     private http: HttpClient
-  ) { }
+    //@Inject(DOCUMENT) private document: Document
+  ) {
+    //this.localStorage = this.document.defaultView?.localStorage;
+  }
+
 
   login(dto: loginDto) {
     this.loading.start();
@@ -35,19 +41,30 @@ export class AuthService {
       user: response.data,
       token: response.token
     }
-    console.log(dtAuth);
-    localStorage.setItem('user', JSON.stringify(dtAuth));
+    localStorage?.setItem('user', JSON.stringify(dtAuth));
     this.loading.stop();
   }
 
-  getToken() {
-    if (localStorage.getItem('user')) {
+  getUser() {
+    if (localStorage?.getItem('user')) {
       try {
-        const token: auth = JSON.parse(localStorage.getItem('user')!);
-        return token;
+        const storage: auth = JSON.parse(localStorage?.getItem('user')!);
+        return storage.user ;
       } catch (error) {
-        console.log("Parse error", error);
-        return null;
+        throw `Token no parseado correctamente ${error}`;
+      }
+    } else {
+      return null;
+    }
+  }
+
+  getToken() {
+    if (localStorage?.getItem('user')) {
+      try {
+        const storage: auth = JSON.parse(localStorage?.getItem('user')!);
+        return storage.token;
+      } catch (error) {
+        throw `Token no parseado correctamente ${error}`;
       }
     } else {
       return null;
@@ -56,13 +73,13 @@ export class AuthService {
 
   logOut() {
     this.loading.start();
-    localStorage.removeItem('user');
+    localStorage?.removeItem('user');
     this.router.navigate(['login']);
     this.loading.stop();
   }
 
   isUserLogedIn() {
-    if (localStorage.getItem('user') !== null) {
+    if (localStorage?.getItem('user') !== null) {
       return true;
     } else {
       return false;
