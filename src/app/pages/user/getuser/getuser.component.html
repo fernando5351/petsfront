@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="button">
+    <button (click)="create()" class="create">
+      <img class="rol-icon" src="/assets/icons/user.svg" alt="">
+      <h2>Crear nuevo usuario</h2>
+    </button>
+  </div>
+  <div class="content">
+    <div class="search">
+      <input type="search" placeholder="Search..." />
+    </div>
+    <div class="list">
+      @for (user of users; track user.id) {
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+        <app-user [user]="user"></app-user>
+      }
+    </div>
+  </div>
+</div>
