@@ -59,7 +59,7 @@ export class RoleComponent {
               `El registro ${this.role.name} ha sido eliminado`,
               'success'
             );
-            this.router.navigate(['/rol']);
+            this.router.navigate(['rol']);
           },
           error: (error) => {
             Swal.fire(
@@ -67,7 +67,7 @@ export class RoleComponent {
               `Error: ${error.message}`,
               'error'
             );
-            this.router.navigate(['/roles']);
+            this.router.navigate(['rol']);
           }
         });
 
