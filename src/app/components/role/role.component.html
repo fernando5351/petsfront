@@ -1,5 +1,5 @@
 <button class="container">
-  <div class="img">
+  <div (click)="goTo('details')" class="img">
   </div>
   <div class="rol">
     <div class="name">
@@ -11,10 +11,10 @@
   </div>
   <div class="actions">
     <button (click)="delete()">
-      <img src="/assets/icons/trash.svg" alt="Eliminar">
+      <img ngSrc="/assets/icons/trash.svg" width="50" height="50" alt="Eliminar">
     </button>
-    <button (click)="edit()">
-      <img src="/assets/icons/edit.svg" alt="Editar">
+    <button (click)="goTo('update')">
+      <img ngSrc="/assets/icons/edit.svg" width="50" height="50" alt="Editar">
     </button>
   </div>
 </button>

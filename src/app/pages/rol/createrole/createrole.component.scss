@@ -20,6 +20,17 @@
   flex-wrap: wrap;
 }
 
+.create{
+  margin-bottom: 20px;
+  color: #fff;
+  background: #353755;
+}
+
+.cancel {
+  background: #000000;
+  color: #fff;
+}
+
 .slide {
   width: 40%;
   height: 100%;
@@ -47,7 +58,7 @@ input, select, option, button{
 }
 
 button {
-  background: #2196F3;
+  background: #353755;
   font-size: 23px;
   font-weight: 300;
   cursor: pointer;
@@ -140,11 +151,11 @@ button {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #353755;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #353755;
 }
 
 input:checked + .slider:before {

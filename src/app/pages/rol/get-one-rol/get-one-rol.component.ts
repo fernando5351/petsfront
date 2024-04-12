@@ -1,36 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RolService } from '../../../service/rol/rol.service';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
-import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Role, UpdateRol } from '../../../interfaces/role.interface';
 import { PermissionService } from '../../../service/permission/permission.service';
-import { UpdatePermission } from '../../../interfaces/role.permissions.interface';
 import { LoadingService } from '../../../service/loading/loading.service';
 
 export interface item {
-   id: number;
-   name: string;
-   accessName: string;
-   permissions: {
-    canCreate: boolean;
-    canRead: boolean;
-    canUpdate: boolean;
-    canDelete: boolean
-  }
+  id: number;
+  name: string;
+  accessName: string;
+  permissions: {
+   canCreate: boolean;
+   canRead: boolean;
+   canUpdate: boolean;
+   canDelete: boolean
+ }
 }
 
 @Component({
-  selector: 'app-updaterole',
+  selector: 'app-get-one-rol',
   standalone: true,
-  imports: [CdkAccordionModule, FormsModule],
-  templateUrl: './updaterole.component.html',
-  styleUrl: './updaterole.component.scss'
+  imports: [CdkAccordionModule],
+  templateUrl: './get-one-rol.component.html',
+  styleUrl: './get-one-rol.component.scss'
 })
-
-export class UpdateroleComponent implements OnInit {
+export class GetOneRolComponent {
   roleId: string = '';
+  isReadOnly: boolean = true;
+  isDisabled: boolean = true;
   role: Role = {
     id: 0,
     name: '',
@@ -111,74 +110,7 @@ export class UpdateroleComponent implements OnInit {
     }
   }
 
-  toggle(permission: keyof typeof item.permissions, item: any) {
-    item.permissions[permission] = !item.permissions[permission];
+  GoTo() {
+    this.router.navigate(['rol'])
   }
-
-  changeStatus() {
-    console.log('inicialmente: ' + this.status);
-
-    Swal.fire({
-      title: "Estado cambiado",
-      text: 'Esta accion revoca o devuelve permiso para acceder',
-      icon: 'success',
-      toast: true,
-      position: 'top-end',
-      timer: 2000
-    })
-    this.status = !this.status;
-  }
-
-  goTo() {
-    this.router.navigate(['rol']);
-  }
-
-  onSubmit() {
-    if (this.formData.name === '') {
-      Swal.fire({
-        title: 'Error',
-        text: 'Nombre requerido',
-        icon: 'error',
-        position: 'top-end'
-      });
-      return
-    }
-    const role: UpdateRol = {
-      name: this.formData.name,
-      status: this.status
-    }
-
-    this.rolService.updateRol( Number(this.roleId) ,role).subscribe({
-      next: (response) => {
-        for (let i = 0; i < this.items.length; i++) {
-          const item = this.items[i];
-
-          const dto: UpdatePermission = {
-            accessName: item.accessName,
-            canCreate: item.permissions.canCreate,
-            canUpdate: item.permissions.canUpdate,
-            canDelete: item.permissions.canDelete,
-            canRead: item.permissions.canRead,
-            roleId: response.data.id
-          }
-          this.permissionService.updatePermission( item.id, dto).subscribe({
-            next: (response) => {
-            }
-          });
-        }
-        this.router.navigate(['rol']);
-      },
-      error: (error) => {
-        if (error.status !== 401) {
-          Swal.fire({
-            title: 'Error',
-            text: error.error.message,
-            icon: 'error',
-          })
-        }
-      }
-    })
-  }
-
-
 }

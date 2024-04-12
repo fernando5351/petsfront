@@ -1,13 +1,14 @@
 <div class="container">
   <div class="button">
     <button (click)="create()" class="create">
-      <img class="rol-icon" src="/assets/icons/rol.svg" alt="">
+      <!-- <img ngSrc="/assets/icons/rol.svg" width="40" height="40" alt=""> -->
+      <img ngSrc="/assets/icons/rol.svg" width="40" height="40" alt="">
       <h2>Crear nuevo rol</h2>
     </button>
   </div>
   <div class="content">
     <div class="search">
-      <input type="search" placeholder="Search..." />
+      <input type="search" (input)="search($event)" placeholder="Search..." />
     </div>
     <div class="list">
       @if (roles.length === 0) {

@@ -19,4 +19,8 @@ export class NavbarComponent {
   logOut(){
     this.authService.logOut();
   }
+
+  goTo(url: string) {
+    this.router.navigate([url]);
+  }
 }

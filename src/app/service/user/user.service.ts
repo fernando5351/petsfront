@@ -31,11 +31,18 @@ export class UserService {
     return this.http.get<GetAllUsers>(`${this.url}`).pipe(
       finalize(() => {
         this.loading.stop()
-      }
+      })
     )
-  )
   }
 
+  getUserById(id: number){
+    this.loading.start();
+    return this.http.get<GetOneUser>(`${this.url}/${id}`).pipe(
+      finalize(() => {
+        this.loading.stop()
+      })
+    )
+  }
 
   updateUser(id: number, dto: UpdateUserDto) {
     this.loading.start();

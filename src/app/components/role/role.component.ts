@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { Role } from '../../interfaces/role.interface';
 import Swal from 'sweetalert2';
 import { RolService } from '../../service/rol/rol.service';
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-role',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './role.component.html',
   styleUrl: './role.component.scss'
 })
@@ -36,8 +37,8 @@ export class RoleComponent {
     private router: Router
   ){}
 
-  edit(){
-    this.router.navigate([`rol/update/${this.role.id}`]);
+  goTo(url: string){
+    this.router.navigate([`rol/${url}/${this.role.id}`]);
   }
 
   delete(){
@@ -47,7 +48,7 @@ export class RoleComponent {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#353755',
       confirmButtonText: 'Si, estoy seguro!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -58,7 +59,7 @@ export class RoleComponent {
               `El registro ${this.role.name} ha sido eliminado`,
               'success'
             );
-            this.router.navigate(['/rol']);
+            this.router.navigate(['rol']);
           },
           error: (error) => {
             Swal.fire(
@@ -66,7 +67,7 @@ export class RoleComponent {
               `Error: ${error.message}`,
               'error'
             );
-            this.router.navigate(['/roles']);
+            this.router.navigate(['rol']);
           }
         });
 
