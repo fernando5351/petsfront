@@ -1,4 +1,5 @@
 import { Role, http } from "./role.interface";
+import {Permission} from './role.permissions.interface'
 
 export interface User {
   id: number;
@@ -11,6 +12,7 @@ export interface User {
   createdAt: Date,
   updatedAt: Date,
   Role: Role
+  Permissions: [Permission]
 }
 
 export interface auth {
@@ -18,7 +20,7 @@ export interface auth {
   token: string
 }
 
-export interface  CreateUserDto extends Omit<User, 'id' | 'Role' | 'createdAt' | 'updatedAt'> {}
+export interface  CreateUserDto extends Omit<User, 'id' | 'Role' | 'createdAt' | 'updatedAt' | 'Permissions'> {}
 
 export interface loginDto {
   email: string;

@@ -19,7 +19,7 @@ export class UserService {
 
   createUser(dto: CreateUserDto){
     this.loading.start();
-    return this.http.post<GetOneUser>(`${this.url}/create`, dto).pipe(
+    return this.http.post<GetOneUser>(`${this.url}/register`, dto).pipe(
       finalize(()=>{
         this.loading.stop()
       })

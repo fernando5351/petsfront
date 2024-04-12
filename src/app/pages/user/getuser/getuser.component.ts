@@ -29,7 +29,19 @@ export class GetuserComponent {
       status: true,
       createdAt: new Date,
       updatedAt: new Date,
-    }
+    },
+    Permissions: [{
+      id: 0,
+      roleId: 0,
+      accessName: '',
+      canCreate: false,
+      canRead: false,
+      canUpdate: false,
+      canDelete: false,
+      createdAt: new Date,
+      updatedAt: new Date
+
+    }]
   }]
 
   constructor(
@@ -42,7 +54,9 @@ export class GetuserComponent {
     this.loadUsers()
   }
 
-  create(){}
+  create(){
+    this.router.navigate(['user/create'])
+  }
 
 
   loadUsers(){

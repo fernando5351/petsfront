@@ -1,1 +1,25 @@
-<p>createuser works!</p>
+<h1>Create User</h1>
+
+<form (submit)="createUser()">
+  <label for="roleId">Role:</label>
+  <select id="roleId" name="roleId" [(ngModel)]="newUser.roleId">
+    <option value="1">Admin</option>
+    <option value="2">User</option>
+    <!-- add more roles here -->
+  </select>
+
+  <label for="name">Name:</label>
+  <input id="name" name="name" [(ngModel)]="newUser.name" type="text">
+
+  <label for="email">Email:</label>
+  <input id="email" name="email" [(ngModel)]="newUser.email" type="email">
+
+  <label for="lastname">Last Name:</label>
+  <input id="lastname" name="lastname" [(ngModel)]="newUser.lastname" type="text">
+
+  <label for="password">Password:</label>
+  <input id="password" name="password" [(ngModel)]="newUser.password" type="password">
+
+  <button type="submit">Create User</button>
+</form>
+
