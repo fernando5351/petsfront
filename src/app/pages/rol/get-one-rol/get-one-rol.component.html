@@ -1,25 +1,22 @@
 <div class="container">
-  <form class="content" (ngSubmit)="onSubmit()">
+  <div class="content" >
     <div class="slide">
       <div class="name-container">
         Nombre:
-        <input type="text" [value]="role.name" placeholder="Ej: Administrador" [(ngModel)]="formData.name" name="name" required>
+        <input type="text" [value]="role.name" name="name" required [readOnly]="isReadOnly">
       </div>
       <div class="name-container">
         <div class="switch-order-container">
           Estado:
           <label class="switch">
-            <input type="checkbox" [checked]="role.status ? true: false" (change)="changeStatus()">
+            <input type="checkbox" [checked]="role.status ? true: false" [disabled]="isDisabled">
             <span class="slider"></span>
           </label>
         </div>
       </div>
-      <div class="btn-container">
-        <button class="update">
-          Actualizar
-        </button>
-        <button class="cancel">
-          Cancelar
+      <div (click)="GoTo()" class="name-container">
+        <button class="back">
+          Volver
         </button>
       </div>
     </div>
@@ -52,7 +49,7 @@
                     <div class="switch-order">
                       Puede Crear
                       <label class="switch">
-                        <input type="checkbox" [checked]="item.permissions.canCreate ? true: false" (change)="toggle('canCreate', item)">
+                        <input type="checkbox" [checked]="item.permissions.canCreate ? true: false" [disabled]="isDisabled">
                         <span class="slider"></span>
                       </label>
                     </div>
@@ -61,7 +58,7 @@
                     <div class="switch-order">
                       Puede Ver
                       <label class="switch">
-                        <input type="checkbox" [checked]="item.permissions.canRead ? true: false" (change)="toggle('canRead', item)">
+                        <input type="checkbox" [checked]="item.permissions.canRead ? true: false" [disabled]="isDisabled">
                         <span class="slider"></span>
                       </label>
                     </div>
@@ -70,7 +67,7 @@
                     <div class="switch-order">
                       Puede Editar
                       <label class="switch">
-                        <input type="checkbox" [checked]="item.permissions.canUpdate ? true: false" (change)="toggle('canUpdate', item)">
+                        <input type="checkbox" [checked]="item.permissions.canUpdate ? true: false" [disabled]="isDisabled">
                         <span class="slider"></span>
                       </label>
                     </div>
@@ -79,7 +76,7 @@
                     <div class="switch-order">
                       Puede Eliminar
                       <label class="switch">
-                        <input type="checkbox" [checked]="item.permissions.canDelete ? true: false" (change)="toggle('canDelete', item)">
+                        <input type="checkbox" [checked]="item.permissions.canDelete ? true: false" [disabled]="isDisabled">
                         <span class="slider"></span>
                       </label>
                     </div>
@@ -89,8 +86,6 @@
           </cdk-accordion-item>
         }
       </cdk-accordion>
-
-
     </div>
-  </form>
+  </div>
 </div>

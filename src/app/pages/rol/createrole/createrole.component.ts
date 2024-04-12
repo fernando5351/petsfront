@@ -56,7 +56,6 @@ export class CreateroleComponent {
     }
     this.rolService.createRol(role).subscribe({
       next: (response) => {
-        console.log(response);
         for (let i = 0; i < this.items.length; i++) {
           const item = this.items[i];
 
@@ -70,14 +69,19 @@ export class CreateroleComponent {
           }
           this.permissionService.createPermission(dto).subscribe({
             next: (response) => {
-              console.log(response);
               this.router.navigate(['rol']);
             }
           });
         }
       },
       error: (error) => {
-        console.log(error);
+        if (error.status !== 401) {
+          Swal.fire({
+            title: 'error',
+            text: error.error.message,
+            icon: 'error'
+          })
+        }
       }
     })
   }

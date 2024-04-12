@@ -36,24 +36,6 @@
   width: 60%;
 }
 
-.btn-container {
-  margin-top: 10%;
-  width: 60%;
-  font-size: 1.5rem;
-  color: #eee;
-}
-
-.update{
-  margin-bottom: 20px;
-  color: #fff;
-  background: #353755;
-}
-
-.cancel {
-  background: #000000;
-  color: #fff;
-}
-
 input, select, option, button{
   width: 100%;
   height: 40px;
@@ -65,8 +47,10 @@ input, select, option, button{
 }
 
 button {
+  background: #2196F3;
   font-size: 23px;
   font-weight: 300;
+  color: #eee;
   cursor: pointer;
 }
 
@@ -132,7 +116,6 @@ button {
 
 .slider {
   position: absolute;
-  cursor: pointer;
   top: 0;
   left: 0;
   right: 0;
@@ -157,7 +140,7 @@ button {
 }
 
 input:checked + .slider {
-  background-color: #353755;
+  background-color: #2196F3;
 }
 
 input:focus + .slider {

@@ -7,11 +7,12 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { httpInterceptor } from './interceptors/http.interceptor';
 import { SweetAlert2LoaderService } from '@sweetalert2/ngx-sweetalert2';
+import { responseApiInterceptor } from './interceptors/response-api.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideHttpClient(withInterceptors([httpInterceptor]), withFetch()),
+    provideHttpClient(withInterceptors([httpInterceptor, responseApiInterceptor]), withFetch()),
     provideClientHydration(),
     provideAnimationsAsync(),
     SweetAlert2LoaderService,

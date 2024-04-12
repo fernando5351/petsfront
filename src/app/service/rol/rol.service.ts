@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 import { LoadingService } from '../loading/loading.service';
 import { finalize } from 'rxjs';
 import { environment } from '../../../environments/environment';
@@ -47,6 +47,16 @@ export class RolService {
         finalize(() => {
             this.loading.stop();
         })
+    );
+  }
+
+  searchByName(name: string) {
+    this.loading.start();
+    const params = new HttpParams().set('name', name)
+    return this.http.get<GetRoles>(`${this.url}/search`,  { params }).pipe(
+      finalize(()=> {
+        this.loading.stop();
+      })
     );
   }
 

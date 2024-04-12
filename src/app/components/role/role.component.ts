@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { Role } from '../../interfaces/role.interface';
 import Swal from 'sweetalert2';
 import { RolService } from '../../service/rol/rol.service';
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-role',
   standalone: true,
-  imports: [],
+  imports: [NgOptimizedImage],
   templateUrl: './role.component.html',
   styleUrl: './role.component.scss'
 })
@@ -36,8 +37,8 @@ export class RoleComponent {
     private router: Router
   ){}
 
-  edit(){
-    this.router.navigate([`rol/update/${this.role.id}`]);
+  goTo(url: string){
+    this.router.navigate([`rol/${url}/${this.role.id}`]);
   }
 
   delete(){
