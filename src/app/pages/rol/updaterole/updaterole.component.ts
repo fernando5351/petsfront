@@ -116,7 +116,21 @@ export class UpdateroleComponent implements OnInit {
   }
 
   changeStatus() {
+    console.log('inicialmente: ' + this.status);
+
+    Swal.fire({
+      title: "Estado cambiado",
+      text: 'Esta accion revoca o devuelve permiso para acceder',
+      icon: 'success',
+      toast: true,
+      position: 'top-end',
+      timer: 2000
+    })
     this.status = !this.status;
+  }
+
+  goTo() {
+    this.router.navigate(['rol']);
   }
 
   onSubmit() {

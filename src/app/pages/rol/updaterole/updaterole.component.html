@@ -9,7 +9,7 @@
         <div class="switch-order-container">
           Estado:
           <label class="switch">
-            <input type="checkbox" [checked]="role.status ? true: false" (change)="changeStatus()">
+            <input type="checkbox" [checked]="status ? true: false" (change)="changeStatus()">
             <span class="slider"></span>
           </label>
         </div>
@@ -18,7 +18,7 @@
         <button class="update">
           Actualizar
         </button>
-        <button class="cancel">
+        <button (click)="goTo()" class="cancel">
           Cancelar
         </button>
       </div>

@@ -14,10 +14,10 @@ export const responseApiInterceptor: HttpInterceptorFn = (req, next) => {
       if (response.status === 401) {
         Swal.fire({
           title:  'Acceso no autorizado',
-          text: response.error.message,
+          text: response.message,
           icon: 'error',
           position: 'top-end',
-          toast: true
+          toast: true,
         });
         authService.logOut();
       }

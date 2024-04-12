@@ -45,6 +45,10 @@ export class CreateroleComponent {
     this.status = !this.status;
   }
 
+  goTo() {
+    this.router.navigate(['rol']);
+  }
+
   onSubmit() {
     if (this.formData.name === '') {
       alert('name mustbe a string');

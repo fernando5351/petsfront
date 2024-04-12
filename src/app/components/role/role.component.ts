@@ -48,7 +48,7 @@ export class RoleComponent {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      cancelButtonColor: '#353755',
       confirmButtonText: 'Si, estoy seguro!'
     }).then((result) => {
       if (result.isConfirmed) {

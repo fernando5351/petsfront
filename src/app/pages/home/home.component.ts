@@ -58,10 +58,11 @@ export class HomeComponent implements OnInit{
           if (error.status !== 401) {
             Swal.fire({
               title: 'Error',
-              text: error.error.message,
+              text: error.message,
               icon: 'error',
               timer: 2000,
-              toast: true
+              toast: true,
+              position: 'top-end'
             })
           }
         }

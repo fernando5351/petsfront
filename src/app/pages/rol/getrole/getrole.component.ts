@@ -76,12 +76,9 @@ export class GetroleComponent implements OnInit {
     if (name) {
       this.rolService.searchByName(name).subscribe({
         next: (response) => {
-          console.log(response);
           this.roles = response.data;
         },
         error: (error)=>{
-          console.log(error);
-
           if (error.status !== 401) {
             this.loadRoles();
             Swal.fire({
@@ -89,7 +86,8 @@ export class GetroleComponent implements OnInit {
               text: error.message,
               icon: 'error',
               timer: 2000,
-              toast: true
+              toast: true,
+              position: 'top-end'
             })
           }
         }
