@@ -14,12 +14,12 @@ import { DOCUMENT } from '@angular/common';
 export class AuthService {
 
   private url = `${environment.apiUrl}/auth`;
- // private localStorage: Storage | undefined = undefined;
+  //private localStorage: Storage | undefined = undefined;
 
   constructor(
     private router: Router,
     private loading: LoadingService,
-    private http: HttpClient
+    private http: HttpClient,
     //@Inject(DOCUMENT) private document: Document
   ) {
     //this.localStorage = this.document.defaultView?.localStorage;

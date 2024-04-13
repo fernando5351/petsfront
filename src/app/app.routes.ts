@@ -12,9 +12,7 @@ export const routes: Routes = [
   {
     path: 'rol',
     canActivate: [AuthGuard()],
-    children: [
-      ...roleRoutes
-    ]
+    loadChildren: () => import('./pages/rol/role.routes').then(m => m.roleRoutes)
   },
   {
     path: 'user',
