@@ -6,7 +6,7 @@ export interface Role {
   status: boolean;
   createdAt: Date;
   updatedAt: Date;
-  Permissions?: [Permission]
+  Permissions: [Permission]
 }
 
 export interface CreateRol extends  Omit<Role, 'id' | 'Permissions' | 'updatedAt' | 'createdAt' >{};

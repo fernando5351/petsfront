@@ -32,6 +32,17 @@ export class HomeComponent implements OnInit{
       status: true,
       createdAt: new Date,
       updatedAt: new Date,
+      Permissions: [{
+        id: 0,
+        roleId: 0,
+        accessName: '',
+        canCreate: false,
+        canRead: false,
+        canUpdate: false,
+        canDelete: false,
+        createdAt: new Date,
+        updatedAt: new Date
+      }]
     }
   };
 

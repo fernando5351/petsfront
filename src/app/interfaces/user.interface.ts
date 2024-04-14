@@ -12,7 +12,6 @@ export interface User {
   createdAt: Date,
   updatedAt: Date,
   Role: Role
-  Permissions: [Permission]
 }
 
 export interface auth {
