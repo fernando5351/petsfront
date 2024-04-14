@@ -17,7 +17,7 @@ export class GetuserComponent {
     id: 0,
     password: '',
     email: '',
-    name: 'Chomin',
+    name: '',
     lastname: '',
     roleId: 0,
     status: true,
