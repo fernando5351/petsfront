@@ -59,9 +59,10 @@ export class CreateuserComponent {
 
     showPassword: boolean = false;
 
-  togglePasswordVisibility(): void {
-  this.showPassword = !this.showPassword;
-  }
+    togglePasswordVisibility(): void {
+      this.showPassword = !this.showPassword;
+    }
+
 
     getRoles(){
       this.rolService.getRol().subscribe({

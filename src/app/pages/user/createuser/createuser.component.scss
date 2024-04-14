@@ -7,7 +7,7 @@
   align-items: center;
 }
 
-.title {
+.title-container {
   font-size: 2rem;
   margin-bottom: 20px;
 }
@@ -16,22 +16,22 @@
   position: relative;
 }
 
-.toggle-password {
+.password-icon-container {
   position: absolute;
-  top: 50%;
-  right: 10px;
+  right: 10px; /* Ajusta la posición horizontalmente según sea necesario */
+  top: 50%; /* Ajusta la posición verticalmente según sea necesario */
   transform: translateY(-50%);
-  cursor: pointer;
 }
 
-.toggle-password i {
-  font-size: 1.2rem;
-  color: #666;
+.password-icon-container img {
+  width: 24px; /* Ajusta el ancho de la imagen según sea necesario */
+  height: auto; /* Permite que la altura se ajuste automáticamente manteniendo la proporción */
 }
+
 
 .content {
   width: 80%;
-  height: 75%;
+  height: 900px;
   border-radius: 20px;
   background: rgba(238, 238, 238, 1);
   border: 1px solid #e6e6e6;
@@ -69,7 +69,7 @@
 input,
 select {
   width: calc(100% - 20px);
-  height: 40px;
+  height: 30px;
   border: none;
   outline: none;
   border-radius: 5px;
