@@ -56,11 +56,6 @@ export class HomeComponent implements OnInit{
     this.getUser();
   }
 
-
-  listUser(){
-    this.router.navigate(['user/list']);
-  }
-
   async getUser() {
     const user: User | null = await this.authService.getUser();
     if (user !== null) {

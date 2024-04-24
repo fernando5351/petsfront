@@ -1,0 +1,51 @@
+/* Estilos para el contenedor */
+.container {
+  width: 20%;
+  position: relative;
+}
+
+/* Estilos para la tarjeta */
+.card {
+  width: 180px;
+  height: 230px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+/* Estilos para la imagen */
+img {
+  width: 180px;
+  height: 230px;
+  transition: transform 0.3s ease;
+}
+
+/* Estilos para la información */
+.info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.info h3, .info p {
+  margin: 0;
+}
+
+.container:hover .card img {
+  transform: rotateY(180deg);
+}
+
+.container:hover .card .info {
+  opacity: 1;
+}
