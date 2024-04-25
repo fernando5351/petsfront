@@ -24,7 +24,7 @@ export class AppComponent {
   }
 
   isLoged():boolean {
-    const result = this.authService.isUserLogedIn();
+    const result = this.authService.isUserLoggedIn();
     if (result) {
       return true
     } else {

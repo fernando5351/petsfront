@@ -1,0 +1,134 @@
+.container {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content {
+  width: 70%;
+  height: 80vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.menu {
+  width: 30%;
+  height: 280px;
+  background: rgba(209, 213, 225, 0.25);
+  border-radius: 10px;
+  box-shadow: inset -4px -4px 16px rgba(16, 27, 42, 0.2),
+    4px 4px 16px rgba(255, 255, 255, 0.25);
+  padding: 1rem;
+  z-index: 1;
+}
+
+a {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  word-break: break-word;
+  outline: none;
+  text-decoration: none;
+}
+
+p {
+  padding-left: 10px;
+  color: rgba(53, 55, 85, .7);
+
+}
+
+.circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 8px solid rgba(209, 213, 225, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(209, 213, 225, 1);
+}
+
+.active {
+  border-color: rgba(53, 55, 85, 1);
+  color: rgba(53, 55, 85, 1);
+}
+
+.line {
+  width: 4px;
+  background-color: rgba(209, 213, 225, 1);
+  height: 15%;
+  padding: 0;
+  margin: 0;
+  margin-left: 33px;
+}
+
+.items {
+  width: 100%;
+  height: 480px;
+  background: rgba(209, 213, 225, 0.25);
+  border-radius: 10px;
+  box-shadow: inset -4px -4px 16px rgba(16, 27, 42, 0.2),
+    4px 4px 16px rgba(255, 255, 255, 0.25);
+  padding: 1rem;
+  transition: opacity 0.3s ease;
+  position: absolute;
+  transition: opacity 0.5s ease;
+  display: flex;
+  justify-content: center;
+}
+
+.items-wrapper {
+  position: relative;
+  height: 100%;
+  width: 60%;
+}
+
+.fadeInOut {
+  opacity: 0;
+}
+
+.fadeInOut.ng-leave.ng-leave-active,
+.fadeInOut.ng-enter {
+  opacity: 0;
+}
+
+.fadeInOut.ng-leave,
+.fadeInOut.ng-enter.ng-enter-active {
+  opacity: 1;
+  pointer-events: none;
+}
+
+.img-container {
+  position: relative;
+  width: 50%;
+  height: 180px;
+  background: rgba(209, 213, 225, 0.25);
+  border-radius: 10px;
+  box-shadow: inset -4px -4px 16px rgba(16, 27, 42, 0.2),
+    4px 4px 16px rgba(255, 255, 255, 0.25);
+  padding: 1rem;
+}
+
+.fileImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

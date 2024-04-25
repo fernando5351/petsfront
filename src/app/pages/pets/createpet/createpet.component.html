@@ -1,1 +1,36 @@
-<p>createpet works!</p>
+<div class="container">
+  <div class="content">
+    <div class="menu">
+      <a href="/pets/create#mascota" (click)="setActiveLink('#mascota')">
+        <div class="circle" [ngClass]="{'active': isActive('#mascota')}"></div>
+        <p class="menu-text">Datos de la mascota</p>
+      </a>
+      <div class="line"></div>
+      <a href="/pets/create#propietario" (click)="setActiveLink('#propietario')">
+        <div class="circle" [ngClass]="{'active': isActive('#propietario')}"></div>
+        <p class="menu-text">Datos del responsable</p>
+      </a>
+      <div class="line"></div>
+      <a href="/pets/create#contacto" (click)="setActiveLink('#contacto')">
+        <div class="circle" [ngClass]="{'active': isActive('#contacto')}"></div>
+        <p class="menu-text">Datos adicionales</p>
+      </a>
+    </div>
+    <form class="items-wrapper" (submit)="onSubmit()" novalidate>
+      <div class="items" id="mascota" *ngIf="isActive('#mascota')" [@fadeInOut]>
+        <div class="img-container" (click)="$event.stopPropagation()">
+          <img [src]="imageUrl" alt="Preview">
+          <input class="fileImg" type="file" (change)="onFileSelected($event)">
+        </div>
+      </div>
+      <div class="items" id="propietario" *ngIf="isActive('#propietario')" [@fadeInOut]>
+        <!-- Contenido de los items de propietario -->
+        <h1>Propietario</h1>
+      </div>
+      <div class="items" id="contacto" *ngIf="isActive('#contacto')" [@fadeInOut]>
+        <!-- Contenido de los items de contacto -->
+        <h1>Contacto y otros datos</h1>
+      </div>
+    </form>
+  </div>
+</div>

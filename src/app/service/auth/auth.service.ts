@@ -1,35 +1,30 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { LoadingService } from '../loading/loading.service';
+import { CookieService } from 'ngx-cookie-service';
 import { finalize } from 'rxjs';
 import { GetOneUser, auth, loginDto } from '../../interfaces/user.interface';
-import { DOCUMENT } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class AuthService {
 
   private url = `${environment.apiUrl}/auth`;
-  //private localStorage: Storage | undefined = undefined;
 
   constructor(
     private router: Router,
     private loading: LoadingService,
     private http: HttpClient,
-    //@Inject(DOCUMENT) private document: Document
-  ) {
-    //this.localStorage = this.document.defaultView?.localStorage;
-  }
-
+    private cookieService: CookieService
+  ) { }
 
   login(dto: loginDto) {
     this.loading.start();
     return this.http.post<GetOneUser>(`${this.url}/login`, dto).pipe(
-      finalize(()=> {
+      finalize(() => {
         this.loading.stop();
       })
     )
@@ -41,14 +36,15 @@ export class AuthService {
       user: response.data,
       token: response.token
     }
-    localStorage?.setItem('user', JSON.stringify(dtAuth));
+    this.cookieService.set('user', JSON.stringify(dtAuth), { expires: 7 });
     this.loading.stop();
   }
 
   getUser() {
-    if (localStorage?.getItem('user')) {
+    const userCookie = this.cookieService.get('user');
+    if (userCookie) {
       try {
-        const storage: auth = JSON.parse(localStorage?.getItem('user')!);
+        const storage: auth = JSON.parse(userCookie);
         return storage.user ;
       } catch (error) {
         throw `Token no parseado correctamente ${error}`;
@@ -59,9 +55,10 @@ export class AuthService {
   }
 
   getToken() {
-    if (localStorage?.getItem('user')) {
+    const userCookie = this.cookieService.get('user');
+    if (userCookie) {
       try {
-        const storage: auth = JSON.parse(localStorage?.getItem('user')!);
+        const storage: auth = JSON.parse(userCookie);
         return storage.token;
       } catch (error) {
         throw `Token no parseado correctamente ${error}`;
@@ -73,17 +70,12 @@ export class AuthService {
 
   logOut() {
     this.loading.start();
-    localStorage?.removeItem('user');
+    this.cookieService.delete('user');
     this.router.navigate(['login']);
     this.loading.stop();
   }
 
-  isUserLogedIn() {
-    if (localStorage?.getItem('user') !== null) {
-      return true;
-    } else {
-      return false;
-    }
+  isUserLoggedIn() {
+    return this.cookieService.check('user');
   }
-
 }
