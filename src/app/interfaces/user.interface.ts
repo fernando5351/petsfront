@@ -19,7 +19,7 @@ export interface auth {
   token: string
 }
 
-export interface  CreateUserDto extends Omit<User, 'id' | 'Role' | 'createdAt' | 'updatedAt' | 'Permissions'> {}
+export interface  CreateUserDto extends Omit<User, 'id' | 'Role' | 'createdAt' | 'updatedAt' | 'Permissions'| 'password'> {}
 
 export interface loginDto {
   email: string;

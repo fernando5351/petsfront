@@ -9,15 +9,15 @@
         <input id="name" name="name" [(ngModel)]="newUser.name" type="text">
       </div>
       <div class="name-container">
-        <label for="email">Email:</label>
-        <input id="email" name="email" [(ngModel)]="newUser.email" type="email">
-      </div>
-      <div class="name-container">
         <label for="lastname">Apellido:</label>
         <input id="lastname" name="lastname" [(ngModel)]="newUser.lastname" type="text">
       </div>
       <div class="name-container">
-        <button type="button" class="cancel">Cancelar</button>
+        <label for="email">Email:</label>
+        <input id="email" name="email" [(ngModel)]="newUser.email" type="email">
+      </div>
+      <div class="name-container">
+        <button type="button" class="cancel" (click)="cancel()">Cancelar</button>
         <button type="submit" class="create">Terminar registro</button>
       </div>
     </div>
@@ -28,18 +28,7 @@
           <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
         </select>
       </div>
-      <div class="name-container">
-        <label for="password">Contraseña:</label>
-        <div class="password-container">
-          <input id="password" name="password" [(ngModel)]="newUser.password" type="{{ showPassword ? 'text' : 'password' }}">
-          <span class="toggle-password" (click)="togglePasswordVisibility()">
-            <div class="password-icon-container">
-              <img *ngIf="showPassword" src="../../../../assets/images/invisible.png" alt="Ocultar contraseña">
-              <img *ngIf="!showPassword" src="../../../../assets/icons/ojo.svg" alt="Mostrar contraseña">
-            </div>
-          </span>
-        </div>
-      </div>
+      <!-- Aquí puedes colocar el campo de contraseña si lo necesitas -->
     </div>
   </form>
 </div>
