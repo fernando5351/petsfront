@@ -17,10 +17,30 @@
       </a>
     </div>
     <form class="items-wrapper" (submit)="onSubmit()" novalidate>
-      <div class="items" id="mascota" *ngIf="isActive('#mascota')" [@fadeInOut]>
+      <div class="items" style="height: 550px; margin-bottom: 70px;" id="mascota" *ngIf="isActive('#mascota')" [@fadeInOut]>
         <div class="img-container" (click)="$event.stopPropagation()">
           <img [src]="imageUrl" alt="Preview">
           <input class="fileImg" type="file" (change)="onFileSelected($event)">
+        </div>
+        <div class="pet-information">
+          <div class="pet-item">
+
+          </div>
+          <div class="pet-item">
+
+          </div>
+          <div class="pet-item">
+
+          </div>
+          <div class="pet-item">
+
+          </div>
+          <div class="pet-item">
+
+          </div>
+          <div class="pet-item">
+
+          </div>
         </div>
       </div>
       <div class="items" id="propietario" *ngIf="isActive('#propietario')" [@fadeInOut]>

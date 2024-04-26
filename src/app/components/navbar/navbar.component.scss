@@ -33,3 +33,19 @@ a:hover {
   color: #ffcc4d;
   cursor: pointer;
 }
+
+@media only screen and (max-width: 700px) {
+  .navigation {
+    bottom: 0;
+    position: fixed;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    z-index: 9;
+  }
+
+  .logo {
+    display: none;
+  }
+}
