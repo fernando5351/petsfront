@@ -33,6 +33,6 @@ export class RoleComponent {
       deleteMethod: this.rolService.deleteRol.bind(this.rolService)
     };
 
-    this.alertService.deleteAlert(deleMethodService, this.role.name, this.role.id, 'rol');
+    this.alertService.deleteAlert(deleMethodService, this.role.name, this.role.id, '/rol');
   }
 }

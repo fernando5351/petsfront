@@ -4,6 +4,7 @@ import { User } from '../../interfaces/user.interface';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserService } from '../../service/user/user.service';
+import { AlertService } from '../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit{
   name = '';
   rol = '';
 
-  user: User ={
+  user: User = {
     id: 0,
     password: '',
     email: '',
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit{
     private authService: AuthService,
     private router: Router,
     private userService: UserService,
+    private alertService: AlertService
   ){}
 
   ngOnInit(): void {
@@ -67,25 +69,13 @@ export class HomeComponent implements OnInit{
         },
         error: (error) => {
           if (error.status !== 401) {
-            Swal.fire({
-              title: 'Error',
-              text: error.message,
-              icon: 'error',
-              timer: 2000,
-              toast: true,
-              position: 'top-end'
-            })
+            this.alertService.errorAlert('Error', error.message, { position: 'top-end' }, true)
           }
         }
       })
     } else {
-      Swal.fire({
-        title: 'Error',
-        text: 'No has iniciado sesión',
-        icon: 'error',
-        confirmButtonText: 'Aceptar',
-      }).then(() => {
-        this.router.navigate(['login']);
+      this.alertService.errorAlert('Error', 'No has iniciado sesión', { position: 'top-end' }, true).then(() => {
+        this.router.navigate(['login'])
       })
     }
   }

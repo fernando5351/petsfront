@@ -4,7 +4,6 @@ import { NgOptimizedImage } from '@angular/common';
 import { RoleComponent } from '../../../components/role/role.component';
 import { Role } from '../../../interfaces/role.interface';
 import { RolService } from '../../../service/rol/rol.service';
-import Swal from 'sweetalert2';
 import { roleObject } from '../../../utils/role.object';
 import { AlertService } from '../../../service/alertservice/alertervice.service';
 
@@ -39,13 +38,7 @@ export class GetroleComponent implements OnInit {
       },
       error: (error) => {
         if (error.status !== 401) {
-          Swal.fire({
-            title: 'error',
-            text: error.message,
-            icon: 'error',
-            position: 'top-end'
-          })
-          this.alertService.errorAlert('Error', error.message, true, )
+          this.alertService.errorAlert('Error', error.message, {position: 'top-right'} )
         }
       }
     })
@@ -68,14 +61,7 @@ export class GetroleComponent implements OnInit {
         error: (error)=>{
           if (error.status !== 401) {
             this.loadRoles();
-            Swal.fire({
-              title: 'Error',
-              text: error.message,
-              icon: 'error',
-              timer: 2000,
-              toast: true,
-              position: 'top-end'
-            })
+            this.alertService.errorAlert('Error', error.message, { position: 'top-right'}, true )
           }
         }
       })
