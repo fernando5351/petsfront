@@ -47,13 +47,15 @@ export class UserComponent {
       private router: Router
     ){}
 
+
+
     delete() {
       Swal.fire({
-        title: '¿Estas seguro de eliminar este registro?',
-        text: 'No podras revertir esta accion',
+        title: '¿Estás seguro de eliminar este registro?',
+        text: 'No podrás revertir esta acción',
         icon: 'question',
-        confirmButtonText: 'Si, eliminar',
-        cancelButtonAriaLabel: 'Cancelar',
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#353755',
@@ -61,7 +63,8 @@ export class UserComponent {
         if (result.isConfirmed) {
           this.userService.deleteUser(this.user.id).subscribe({
             next: (response) => {
-              this.router.navigate(['user']);
+              // Ejecutar la función para recargar la página
+              window.location.reload();
             },
             error: (error) => {
               if (error.status !== 401) {
@@ -76,11 +79,10 @@ export class UserComponent {
         } else {
           Swal.fire({
             title: 'Cancelado',
-            text: 'Tu registro esta a salvo',
+            text: 'Tu registro está a salvo',
             icon: 'info'
           })
         }
       })
     }
   }
-

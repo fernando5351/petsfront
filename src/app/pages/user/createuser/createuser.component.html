@@ -9,18 +9,16 @@
         <input id="name" name="name" [(ngModel)]="newUser.name" type="text">
       </div>
       <div class="name-container">
-        <label for="email">Email:</label>
-        <input id="email" name="email" [(ngModel)]="newUser.email" type="email">
-      </div>
-      <div class="name-container">
         <label for="lastname">Apellido:</label>
         <input id="lastname" name="lastname" [(ngModel)]="newUser.lastname" type="text">
       </div>
       <div class="name-container">
-        <button type="button" class="cancel">Cancelar</button> <!-- Movido el botón "Cancelar" al lado izquierdo -->
+        <label for="email">Email:</label>
+        <input id="email" name="email" [(ngModel)]="newUser.email" type="email">
       </div>
       <div class="name-container">
-        <button type="submit" class="create">Terminar registro</button> <!-- Movido el botón "Terminar registro" al lado derecho -->
+        <button type="button" class="cancel" (click)="cancel()">Cancelar</button>
+        <button type="submit" class="create">Terminar registro</button>
       </div>
     </div>
     <div class="slide">
@@ -30,15 +28,7 @@
           <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
         </select>
       </div>
-      <div class="name-container">
-        <label for="password">Contraseña:</label>
-        <div class="password-container">
-          <input id="password" name="password" [(ngModel)]="newUser.password" type="password">
-          <span class="toggle-password" (click)="togglePasswordVisibility()">
-            <i class="fas" [ngClass]="{'fa-eye': showPassword, 'fa-eye-slash': !showPassword}"></i>
-          </span>
-        </div>
-      </div>
+      <!-- Aquí puedes colocar el campo de contraseña si lo necesitas -->
     </div>
   </form>
 </div>

@@ -24,7 +24,7 @@ export class CreateuserComponent {
     name: '',
     email: '',
     lastname: '',
-    password: '',
+
     status: true,
   }
 
@@ -59,9 +59,10 @@ export class CreateuserComponent {
 
     showPassword: boolean = false;
 
-  togglePasswordVisibility(): void {
-  this.showPassword = !this.showPassword;
-  }
+    togglePasswordVisibility(): void {
+      this.showPassword = !this.showPassword;
+    }
+
 
     getRoles(){
       this.rolService.getRol().subscribe({
@@ -75,13 +76,28 @@ export class CreateuserComponent {
       })
     }
 
+    cancel(){
+      this.router.navigate(['/user/list']);
+    }
 
     createUser(): void {
       this.userService.createUser(this.newUser).subscribe({
         next: (response) => {
           console.log('User created successfully', response);
-          // Redirigir a la ruta 'user/list' después de crear el usuario exitosamente
-          this.router.navigate(['/user/list']);
+          if (response.statusCode === 201) {
+            Swal.fire({
+              icon: 'success',
+              title: 'Revisa tu Gmail',
+              text: 'para crear una contraseña',
+              didClose: () => {
+                // Redirigir a la ruta 'user/list' después de cerrar la modal
+                this.router.navigate(['/user/list']);
+              }
+            });
+          } else {
+            // Redirigir a la ruta 'user/list' si el estado de la respuesta no es 201
+            this.router.navigate(['/user/list']);
+          }
         },
         error: (error) => {
           console.log('Error', error);
@@ -101,7 +117,6 @@ export class CreateuserComponent {
               });
             }
           } else {
-
             Swal.fire({
               icon: 'error',
               title: 'Error',
@@ -111,4 +126,4 @@ export class CreateuserComponent {
         }
       });
     }
-  }
+}
