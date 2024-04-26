@@ -5,6 +5,8 @@ import { RoleComponent } from '../../../components/role/role.component';
 import { Role } from '../../../interfaces/role.interface';
 import { RolService } from '../../../service/rol/rol.service';
 import Swal from 'sweetalert2';
+import { roleObject } from '../../../utils/role.object';
+import { AlertService } from '../../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-getrole',
@@ -14,28 +16,12 @@ import Swal from 'sweetalert2';
   styleUrl: './getrole.component.scss'
 })
 export class GetroleComponent implements OnInit {
-  roles: Role[] = [{
-    id: 0,
-    name: 'Admin',
-    status: false,
-    createdAt: new Date,
-    updatedAt: new Date,
-    Permissions: [{
-      id: 0,
-      roleId: 0,
-      accessName: '',
-      canCreate: false,
-      canRead: false,
-      canUpdate: false,
-      canDelete: false,
-      createdAt: new Date,
-      updatedAt: new Date
-    }]
-  }];
+  roles: Role[] = [roleObject];
 
   constructor(
     private router: Router,
-    private rolService: RolService
+    private rolService: RolService,
+    private alertService: AlertService
   ){}
 
   ngOnInit(): void {
@@ -59,6 +45,7 @@ export class GetroleComponent implements OnInit {
             icon: 'error',
             position: 'top-end'
           })
+          this.alertService.errorAlert('Error', error.message, true, )
         }
       }
     })
