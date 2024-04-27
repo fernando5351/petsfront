@@ -1,23 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RolService } from '../../../service/rol/rol.service';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
-import Swal from 'sweetalert2';
-import { Role, UpdateRol } from '../../../interfaces/role.interface';
-import { PermissionService } from '../../../service/permission/permission.service';
-import { LoadingService } from '../../../service/loading/loading.service';
-
-export interface item {
-  id: number;
-  name: string;
-  accessName: string;
-  permissions: {
-   canCreate: boolean;
-   canRead: boolean;
-   canUpdate: boolean;
-   canDelete: boolean
- }
-}
+import { Role, item } from '../../../interfaces/role.interface';
+import { roleObject } from '../../../utils/role.object';
+import { permissionItems } from '../../../utils/itemsAcess.object';
+import { AlertService } from '../../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-get-one-rol',
@@ -26,42 +14,18 @@ export interface item {
   templateUrl: './get-one-rol.component.html',
   styleUrl: './get-one-rol.component.scss'
 })
-export class GetOneRolComponent {
+
+export class GetOneRolComponent implements OnInit {
   roleId: string = '';
   isReadOnly: boolean = true;
   isDisabled: boolean = true;
-  role: Role = {
-    id: 0,
-    name: '',
-    status: false,
-    createdAt: new Date,
-    updatedAt: new Date,
-    Permissions: [{
-      id: 0,
-      roleId: 0,
-      accessName: '',
-      canCreate: false,
-      canRead: false,
-      canUpdate: false,
-      canDelete: false,
-      createdAt: new Date,
-      updatedAt: new Date
-    }]
-  };
+  role: Role = roleObject
 
   formData = {
     name: '',
   };
 
-  items: item[] = [
-    { id: 0, name: 'Roles', accessName: 'role', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Usuarios', accessName: 'user', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Permisos', accessName: 'permissions', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Animales', accessName: 'pet', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Direcciones', accessName: 'direction', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Dueños', accessName: 'owner', permissions: { canCreate: true, canRead: true, canUpdate: true, canDelete: true } },
-    { id: 0, name: 'Especies', accessName: 'specie', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-  ];
+  items: item[] = permissionItems;
   expandedIndex = 0;
   status: boolean = true;
 
@@ -69,8 +33,7 @@ export class GetOneRolComponent {
     private router: Router,
     private route: ActivatedRoute,
     private rolService: RolService,
-    private permissionService: PermissionService,
-    private loadingService: LoadingService
+    private alertService: AlertService
   ){}
 
   ngOnInit(): void {
@@ -85,11 +48,7 @@ export class GetOneRolComponent {
           this.updateItemsWithRolePermissions();
         },
         error: (error) => {
-          Swal.fire({
-            title: 'Error',
-            text: error.message,
-            icon: 'error'
-          })
+          this.alertService.errorAlert('Error', error.message);
         }
       });
     });

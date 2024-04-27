@@ -43,7 +43,7 @@ export class AlertService {
     });
   }
 
-  deleteAlert<T>(service: ServiceMethodInterface<T>, name: string, id: number, url: string): Promise<void> {
+  deleteAlert<T>(service: ServiceMethodInterface<T>, name: string, id: number): Promise<void> {
     return new Promise<void>((resolve) => {
       Swal.fire({
         title: `¿Estás seguro de querer borrar el registro ${name}?`,
@@ -58,7 +58,6 @@ export class AlertService {
           service.deleteMethod(id).subscribe({
             next: (response: any) => {
               this.sucessAlert('¡Eliminado!', 'El registro ha sido eliminado').then(() => {
-                this.router.navigate([url]);
                 resolve();
               });
             },
@@ -73,33 +72,11 @@ export class AlertService {
     });
   }
 
-// deleteAlert<T>(service: ServiceMethodInterface<T>, name: string, id: number, url: string) {
-//   Swal.fire({
-//     title: `¿Estás seguro de querer borrar el registro ${name}?`,
-//     text: "¡No podrás revertir esto!",
-//     icon: 'warning',
-//     showCancelButton: true,
-//     confirmButtonColor: '#d33',
-//     cancelButtonColor: '#353755',
-//     confirmButtonText: '¡Sí, estoy seguro!'
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       service.deleteMethod(id).subscribe({
-//         next: (response: any) => {
-//           this.sucessAlert('¡Eliminado!', 'El registro ha sido eliminado');
-//           setTimeout(() => {
-//             window.location.href = url;
-//           }, 500);
-//         },
-//         error: (error: any) => {
-//           this.errorAlert('Error', error.message)
-//           return
-//         }
-//       });
-//     } else {
-//       this.errorAlert('Cancelado', 'Tu registro está a salvo');
-//     }
-//   });
-// }
+  goTo(url: string) {
+    const currentUrl = this.router.url;
 
+    this.router.navigateByUrl(url, { skipLocationChange: true }).then(() => {
+      this.router.navigateByUrl(currentUrl);
+    });
+  }
 }

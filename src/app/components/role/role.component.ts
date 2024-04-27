@@ -21,11 +21,11 @@ export class RoleComponent {
   constructor(
     private rolService: RolService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
   ){}
 
   goTo(url: string){
-    this.router.navigate([`rol/${url}/${this.role.id}`]);
+    this.router.navigate([url]);
   }
 
   delete(){
@@ -33,6 +33,12 @@ export class RoleComponent {
       deleteMethod: this.rolService.deleteRol.bind(this.rolService)
     };
 
-    this.alertService.deleteAlert(deleMethodService, this.role.name, this.role.id, '/rol');
+    this.alertService.deleteAlert(deleMethodService, this.role.name, this.role.id)
+    .then(() => {
+      this.alertService.goTo('/rol/create');
+    })
+    .catch((error) => {
+      this.alertService.errorAlert('Error al eliminar el registro', error);
+    });
   }
 }

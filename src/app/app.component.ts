@@ -20,7 +20,6 @@ export class AppComponent {
   ) {}
 
   ngOnInit() {
-    console.log(this.authService.getToken());
   }
 
   isLoged():boolean {

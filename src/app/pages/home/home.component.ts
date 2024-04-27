@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../service/auth/auth.service';
 import { User } from '../../interfaces/user.interface';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { userObject } from '../../utils/user.object';
 import { UserService } from '../../service/user/user.service';
 import { AlertService } from '../../service/alertservice/alertervice.service';
 
@@ -17,35 +17,7 @@ export class HomeComponent implements OnInit{
   name = '';
   rol = '';
 
-  user: User = {
-    id: 0,
-    password: '',
-    email: '',
-    name: '',
-    lastname: '',
-    roleId: 0,
-    status: true,
-    createdAt: new Date,
-    updatedAt: new Date,
-    Role: {
-      id: 0,
-      name: '',
-      status: true,
-      createdAt: new Date,
-      updatedAt: new Date,
-      Permissions: [{
-        id: 0,
-        roleId: 0,
-        accessName: '',
-        canCreate: false,
-        canRead: false,
-        canUpdate: false,
-        canDelete: false,
-        createdAt: new Date,
-        updatedAt: new Date
-      }]
-    }
-  };
+  user: User = userObject;
 
   constructor(
     private authService: AuthService,

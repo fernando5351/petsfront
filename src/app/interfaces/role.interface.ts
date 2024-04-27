@@ -25,3 +25,15 @@ export interface GetRoles extends http {
 export interface GetRol extends http {
   data: Role;
 }
+
+export interface item {
+  id: number;
+  name: string;
+  accessName: string;
+  permissions: {
+   canCreate: boolean;
+   canRead: boolean;
+   canUpdate: boolean;
+   canDelete: boolean
+ }
+}

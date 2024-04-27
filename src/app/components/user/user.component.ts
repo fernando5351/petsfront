@@ -29,6 +29,6 @@ export class UserComponent {
         deleteMethod: this.userService.deleteUser.bind(this.userService)
       };
 
-      this.alertService.deleteAlert(deleteMethoService, this.user.name, this.user.id, 'user')
+      this.alertService.deleteAlert(deleteMethoService, this.user.name, this.user.id)
     }
   }
