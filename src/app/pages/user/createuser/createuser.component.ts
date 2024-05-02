@@ -24,13 +24,12 @@ export class CreateuserComponent {
     name: '',
     email: '',
     lastname: '',
-
     status: true,
   }
 
   roles: Role[] = [{
     id: 0,
-    name: 'Admin',
+    name: '',
     status: false,
     createdAt: new Date,
     updatedAt: new Date,
@@ -81,6 +80,9 @@ export class CreateuserComponent {
     }
 
     createUser(): void {
+
+      console.log(this.newUser.status);
+
       this.userService.createUser(this.newUser).subscribe({
         next: (response) => {
           console.log('User created successfully', response);

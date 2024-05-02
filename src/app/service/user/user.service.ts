@@ -46,7 +46,7 @@ export class UserService {
 
   updateUser(id: number, dto: UpdateUserDto) {
     this.loading.start();
-    return this.http.patch<GetOneUser>(`${this.url}/${id}`, dto).pipe(
+    return this.http.patch<User>(`${this.url}/${id}`, dto).pipe(
       finalize(() => this.loading.stop())
     );
   }

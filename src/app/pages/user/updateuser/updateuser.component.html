@@ -1,1 +1,40 @@
-<p>updateuser works!</p>
+<div class="container">
+  <div class="title-container">
+    <h1>Editar Usuario</h1>
+  </div>
+  <form class="content" (submit)="updateUser()">
+    <div class="permissions">
+      <div class="name-container">
+        <label for="name">Nombre:</label>
+        <input id="name" name="name" [(ngModel)]="user.data.name" type="text"/>
+      </div>
+      <div class="name-container">
+        <label for="lastname">Apellido:</label>
+        <input id="lastname" name="lastname" [(ngModel)]="user.data.lastname" type="text">
+      </div>
+      <div class="name-container">
+        <label for="email">Email:</label>
+        <input id="email" name="email" [(ngModel)]="user.data.email" type="email">
+      </div>
+      <div class="name-container">
+        <button type="button" class="cancel" (click)="cancel()">Cancelar</button>
+        <button type="submit" class="create">Editar registro</button>
+      </div>
+    </div>
+    <div class="slide">
+      <div class="name-container">
+        <label for="roleId">Rol</label>
+        <select id="roleId" name="roleId" [value]="user.data.Role.name">
+          <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+        </select>
+      </div>
+      <div class="name-container">
+        <label for="status">Estado:</label>
+        <select id="status" name="status" [(ngModel)]="user.data.status">
+          <option value="true">Activo</option>
+          <option value="false">Inactivo</option>
+        </select>
+      </div>
+    </div>
+  </form>
+</div>
