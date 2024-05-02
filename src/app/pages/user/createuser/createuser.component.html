@@ -1,6 +1,6 @@
 <div class="container">
   <div class="title-container">
-    <h1>Nuevo Usuario</h1> <!-- Título centrado en la parte superior -->
+    <h1>Nuevo Usuario</h1>
   </div>
   <form class="content" (submit)="createUser()">
     <div class="permissions">
@@ -28,7 +28,6 @@
           <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
         </select>
       </div>
-      <!-- Aquí puedes colocar el campo de contraseña si lo necesitas -->
     </div>
   </form>
 </div>

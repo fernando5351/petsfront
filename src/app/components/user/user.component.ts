@@ -31,4 +31,10 @@ export class UserComponent {
 
       this.alertService.deleteAlert(deleteMethoService, this.user.name, this.user.id)
     }
+
+    editUser() {
+      this.router.navigate(['/user/update', this.user.id]);
+    }
+
+
   }
