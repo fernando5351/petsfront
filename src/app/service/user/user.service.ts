@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { LoadingService } from '../loading/loading.service';
-import {User,CreateUserDto,GetAllUsers,GetOneUser,UpdateUserDto} from '../../interfaces/user.interface'
+import { CreateUserDto,GetAllUsers,GetOneUser,UpdateUserDto} from '../../interfaces/user.interface'
 import { finalize } from 'rxjs';
 import { environment } from '../../../environments/environment';
 

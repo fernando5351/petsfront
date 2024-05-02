@@ -6,11 +6,12 @@ import { Role, item } from '../../../interfaces/role.interface';
 import { roleObject } from '../../../utils/role.object';
 import { permissionItems } from '../../../utils/itemsAcess.object';
 import { AlertService } from '../../../service/alertservice/alertervice.service';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-get-one-rol',
   standalone: true,
-  imports: [CdkAccordionModule],
+  imports: [CdkAccordionModule, NgIf],
   templateUrl: './get-one-rol.component.html',
   styleUrl: './get-one-rol.component.scss'
 })
@@ -45,6 +46,8 @@ export class GetOneRolComponent implements OnInit {
           this.role = response.data;
           this.formData.name = this.role.name;
           this.status = this.role.status;
+          console.log(this.role);
+
           this.updateItemsWithRolePermissions();
         },
         error: (error) => {

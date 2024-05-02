@@ -11,6 +11,8 @@ export const roleObject: Role = {
     roleId: 0,
     accessName: '',
     canCreate: false,
+    getById: false,
+    onlyMyRecord: true,
     canRead: false,
     canUpdate: false,
     canDelete: false,

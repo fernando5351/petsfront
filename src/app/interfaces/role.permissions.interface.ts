@@ -4,6 +4,8 @@ export interface Permission {
   accessName: string;
   canCreate: boolean;
   canRead: boolean;
+  getById: boolean;
+  onlyMyRecord: boolean;
   canUpdate: boolean;
   canDelete: boolean;
   createdAt: Date;

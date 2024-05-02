@@ -6,12 +6,14 @@ import { CreateRol, Role } from '../../../interfaces/role.interface';
 import { PermissionService } from '../../../service/permission/permission.service';
 import { CreatePemission } from '../../../interfaces/role.permissions.interface';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import { NgIf } from '@angular/common';
+import { permissionItems } from '../../../utils/itemsAcess.object';
+import { AlertService } from '../../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-createrole',
   standalone: true,
-  imports: [ CdkAccordionModule, FormsModule ],
+  imports: [ CdkAccordionModule, FormsModule, NgIf ],
   templateUrl: './createrole.component.html',
   styleUrl: './createrole.component.scss'
 })
@@ -19,22 +21,15 @@ export class CreateroleComponent {
   formData = {
     name: ''
   };
-  items = [
-    { name: 'Roles', accessName: 'role', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { name: 'Usuarios', accessName: 'user', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { name: 'Permisos', accessName: 'permissions', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { name: 'Animales', accessName: 'pet', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { name: 'Direcciones', accessName: 'direction', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { name: 'Dueños', accessName: 'owner', permissions: { canCreate: true, canRead: true, canUpdate: true, canDelete: true } },
-    { name: 'Especies', accessName: 'specie', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-  ];
+  items = permissionItems;
   expandedIndex = 0;
   status: boolean = true;
 
   constructor(
     private rolService: RolService,
     private permissionService: PermissionService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) {}
 
   toggle(permission: keyof typeof item.permissions, item: any) {
@@ -69,8 +64,12 @@ export class CreateroleComponent {
             canUpdate: item.permissions.canUpdate,
             canDelete: item.permissions.canDelete,
             canRead: item.permissions.canRead,
+            onlyMyRecord: item.permissions?.onlyMyRecord ?? false,
+            getById: item.permissions.getById,
             roleId: response.data.id
           }
+          console.log(dto);
+
           this.permissionService.createPermission(dto).subscribe({
             next: (response) => {
               this.router.navigate(['rol']);
@@ -80,11 +79,7 @@ export class CreateroleComponent {
       },
       error: (error) => {
         if (error.status !== 401) {
-          Swal.fire({
-            title: 'error',
-            text: error.error.message,
-            icon: 'error'
-          })
+          this.alertService.errorAlert('Error', error.error.message);
         }
       }
     })

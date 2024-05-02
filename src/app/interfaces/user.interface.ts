@@ -35,3 +35,9 @@ export interface  GetOneUser extends http {
   data: User,
   token: string;
 }
+
+export interface changePassword {
+  oldPassword?: string;
+  password: string;
+  repeatNewPassword: string;
+}

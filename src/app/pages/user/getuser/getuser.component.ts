@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import {UserComponent} from '../../../components/user/user.component';
 import {User} from '../../../interfaces/user.interface'
 import {UserService} from '../../../service/user/user.service'
-import { response } from 'express';
+import { userObject } from '../../../utils/user.object';
+import { AlertService } from '../../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-getuser',
@@ -12,43 +13,13 @@ import { response } from 'express';
   templateUrl: './getuser.component.html',
   styleUrl: './getuser.component.scss'
 })
-export class GetuserComponent {
-  users: User[] =[{
-    id: 0,
-    password: '',
-    email: '',
-    name: '',
-    lastname: '',
-    roleId: 0,
-    status: true,
-    createdAt: new Date,
-    updatedAt: new Date,
-    Role: {
-      id: 0,
-      name: '',
-      status: true,
-      createdAt: new Date,
-      updatedAt: new Date,
-      Permissions: [{
-        id: 0,
-        roleId: 0,
-        accessName: '',
-        canCreate: false,
-        canRead: false,
-        canUpdate: false,
-        canDelete: false,
-        createdAt: new Date,
-        updatedAt: new Date
-
-      }]
-    },
-  }]
+export class GetuserComponent implements OnInit {
+  users: User[] = [userObject];
 
   constructor(
     private router: Router,
     private userSerive: UserService
   ){}
-
 
   ngOnInit():void{
     this.loadUsers()
@@ -66,8 +37,7 @@ export class GetuserComponent {
         this.users = response.data;
       },
       error:(error)=>{
-        console.log(error);
-
+        console.log(error)
       }
     })
   }

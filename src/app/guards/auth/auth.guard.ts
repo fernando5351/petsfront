@@ -11,7 +11,7 @@ export const AuthGuard = () => {
     if (token) {
       return true;
     } else {
-      router.navigate(['login']);
+      router.navigate(['auth/login']);
       return false;
     }
   };

@@ -32,6 +32,8 @@ export interface item {
   accessName: string;
   permissions: {
    canCreate: boolean;
+   getById: boolean;
+   onlyMyRecord?: boolean;
    canRead: boolean;
    canUpdate: boolean;
    canDelete: boolean

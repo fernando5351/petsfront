@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingService } from '../loading/loading.service';
 import { CookieService } from 'ngx-cookie-service';
 import { finalize } from 'rxjs';
-import { GetOneUser, auth, loginDto } from '../../interfaces/user.interface';
+import { GetOneUser, auth, changePassword, loginDto } from '../../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -28,6 +28,22 @@ export class AuthService {
         this.loading.stop();
       })
     )
+  }
+
+  passwordSetOrUpdate(token: string | null, dto: changePassword) {
+    this.loading.start()
+
+    let headers = new HttpHeaders();
+
+    if (token !== null) {
+      headers = headers.append('x-recovery-authenticate', token);
+    }
+
+    return this.http.post(`${this.url}/recovery-password`, dto, { headers }).pipe(
+      finalize(() => {
+        this.loading.stop();
+      })
+    );
   }
 
   saveToken(response: GetOneUser){
@@ -71,11 +87,22 @@ export class AuthService {
   logOut() {
     this.loading.start();
     this.cookieService.delete('user');
-    this.router.navigate(['login']);
+    this.router.navigateByUrl('rol', { skipLocationChange: true }).then(() => {
+      this.router.navigate(['auth/login']);
+    });
     this.loading.stop();
   }
 
-  isUserLoggedIn() {
-    return this.cookieService.check('user');
+  isUserLoggedIn(): boolean {
+    const userCookie = this.cookieService.get('user');
+    if (userCookie) {
+      try {
+        const storage: auth = JSON.parse(userCookie);
+        return !!storage.user && !!storage.token;
+      } catch (error) {
+        console.error('Error al parsear la cookie del usuario:', error);
+      }
+    }
+    return false;
   }
 }

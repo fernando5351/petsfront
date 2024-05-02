@@ -9,6 +9,7 @@ import { log } from 'console';
 import { RolService } from '../../../service/rol/rol.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { roleObject } from '../../../utils/role.object';
 
 @Component({
   selector: 'app-createuser',
@@ -28,24 +29,7 @@ export class CreateuserComponent {
     status: true,
   }
 
-  roles: Role[] = [{
-    id: 0,
-    name: 'Admin',
-    status: false,
-    createdAt: new Date,
-    updatedAt: new Date,
-    Permissions: [{
-      id: 0,
-      roleId: 0,
-      accessName: '',
-      canCreate: false,
-      canRead: false,
-      canUpdate: false,
-      canDelete: false,
-      createdAt: new Date,
-      updatedAt: new Date
-    }]
-  }];
+  roles: Role[] = [roleObject];
 
 
   ngOnInit():void{

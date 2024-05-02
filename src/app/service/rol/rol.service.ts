@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http'
 import { LoadingService } from '../loading/loading.service';
 import { finalize } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { CreateRol, GetRol, GetRoles, Role, UpdateRol } from '../../interfaces/role.interface';
+import { CreateRol, GetRol, GetRoles, UpdateRol } from '../../interfaces/role.interface';
 
 @Injectable({
   providedIn: 'root'

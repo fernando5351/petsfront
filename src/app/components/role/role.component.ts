@@ -25,7 +25,7 @@ export class RoleComponent {
   ){}
 
   goTo(url: string){
-    this.router.navigate([url]);
+    this.router.navigate([`rol/${url}/${this.role.id}`]);
   }
 
   delete(){

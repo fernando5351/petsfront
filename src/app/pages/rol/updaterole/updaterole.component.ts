@@ -3,66 +3,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { RolService } from '../../../service/rol/rol.service';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
 import { FormsModule } from '@angular/forms';
-import Swal from 'sweetalert2';
-import { Role, UpdateRol } from '../../../interfaces/role.interface';
+import { Role, UpdateRol, item } from '../../../interfaces/role.interface';
 import { PermissionService } from '../../../service/permission/permission.service';
 import { UpdatePermission } from '../../../interfaces/role.permissions.interface';
-import { LoadingService } from '../../../service/loading/loading.service';
-
-export interface item {
-   id: number;
-   name: string;
-   accessName: string;
-   permissions: {
-    canCreate: boolean;
-    canRead: boolean;
-    canUpdate: boolean;
-    canDelete: boolean
-  }
-}
+import { permissionItems } from '../../../utils/itemsAcess.object';
+import { NgIf } from '@angular/common';
+import { roleObject } from '../../../utils/role.object';
+import { AlertService } from '../../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-updaterole',
   standalone: true,
-  imports: [CdkAccordionModule, FormsModule],
+  imports: [CdkAccordionModule, FormsModule, NgIf],
   templateUrl: './updaterole.component.html',
   styleUrl: './updaterole.component.scss'
 })
 
 export class UpdateroleComponent implements OnInit {
   roleId: string = '';
-  role: Role = {
-    id: 0,
-    name: '',
-    status: false,
-    createdAt: new Date,
-    updatedAt: new Date,
-    Permissions: [{
-      id: 0,
-      roleId: 0,
-      accessName: '',
-      canCreate: false,
-      canRead: false,
-      canUpdate: false,
-      canDelete: false,
-      createdAt: new Date,
-      updatedAt: new Date
-    }]
-  };
+  role: Role = roleObject;
 
   formData = {
     name: '',
   };
 
-  items: item[] = [
-    { id: 0, name: 'Roles', accessName: 'role', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Usuarios', accessName: 'user', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Permisos', accessName: 'permissions', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Animales', accessName: 'pet', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Direcciones', accessName: 'direction', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-    { id: 0, name: 'Dueños', accessName: 'owner', permissions: { canCreate: true, canRead: true, canUpdate: true, canDelete: true } },
-    { id: 0, name: 'Especies', accessName: 'specie', permissions: { canCreate: false, canRead: false, canUpdate: false, canDelete: false } },
-  ];
+  items: item[] = permissionItems;
   expandedIndex = 0;
   status: boolean = true;
 
@@ -71,7 +36,7 @@ export class UpdateroleComponent implements OnInit {
     private route: ActivatedRoute,
     private rolService: RolService,
     private permissionService: PermissionService,
-    private loadingService: LoadingService
+    private alertService: AlertService
   ){}
 
   ngOnInit(): void {
@@ -86,11 +51,7 @@ export class UpdateroleComponent implements OnInit {
           this.updateItemsWithRolePermissions();
         },
         error: (error) => {
-          Swal.fire({
-            title: 'Error',
-            text: error.message,
-            icon: 'error'
-          })
+          this.alertService.errorAlert('Error', error.message);
         }
       });
     });
@@ -106,6 +67,8 @@ export class UpdateroleComponent implements OnInit {
           this.items[index].permissions.canRead = permission.canRead;
           this.items[index].permissions.canUpdate = permission.canUpdate;
           this.items[index].permissions.canDelete = permission.canDelete;
+          this.items[index].permissions.getById = permission.getById;
+          this.items[index].permissions.onlyMyRecord = permission.onlyMyRecord;
         }
       });
     }
@@ -116,16 +79,9 @@ export class UpdateroleComponent implements OnInit {
   }
 
   changeStatus() {
-    console.log('inicialmente: ' + this.status);
+    let  message = 'Esta accion revoca o devuelve permiso para acceder';
 
-    Swal.fire({
-      title: "Estado cambiado",
-      text: 'Esta accion revoca o devuelve permiso para acceder',
-      icon: 'success',
-      toast: true,
-      position: 'top-end',
-      timer: 2000
-    })
+    this.alertService.sucessAlert("Estado cambiado", message, { position: 'top-end' }, true);
     this.status = !this.status;
   }
 
@@ -135,12 +91,7 @@ export class UpdateroleComponent implements OnInit {
 
   onSubmit() {
     if (this.formData.name === '') {
-      Swal.fire({
-        title: 'Error',
-        text: 'Nombre requerido',
-        icon: 'error',
-        position: 'top-end'
-      });
+      this.alertService.errorAlert('Error', 'Nombre requerido');
       return
     }
     const role: UpdateRol = {
@@ -170,11 +121,7 @@ export class UpdateroleComponent implements OnInit {
       },
       error: (error) => {
         if (error.status !== 401) {
-          Swal.fire({
-            title: 'Error',
-            text: error.error.message,
-            icon: 'error',
-          })
+          this.alertService.errorAlert('Error', error.error.message);
         }
       }
     })

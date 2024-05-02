@@ -66,6 +66,24 @@
                     </label>
                   </div>
                 </div>
+                <div class="check-content" *ngIf="item.accessName === 'user'">
+                  <div class="switch-order">
+                    solamente su usuario
+                    <label class="switch">
+                      <input type="checkbox" [checked]="false" (change)="toggle('onlyMyRecord', item)">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="check-content">
+                  <div class="switch-order">
+                    Ver por item
+                    <label class="switch">
+                      <input type="checkbox" [checked]="false" (change)="toggle('getById', item)">
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
                 <div class="check-content">
                   <div class="switch-order">
                     Puede Editar
