@@ -76,12 +76,14 @@ export class UpdateroleComponent implements OnInit {
 
   toggle(permission: keyof typeof item.permissions, item: any) {
     item.permissions[permission] = !item.permissions[permission];
+    console.log(item);
+
   }
 
   changeStatus() {
     let  message = 'Esta accion revoca o devuelve permiso para acceder';
 
-    this.alertService.sucessAlert("Estado cambiado", message, { position: 'top-end' }, true);
+    this.alertService.sucessAlert("Estado cambiado", message, 2000, { position: 'top-end' }, true);
     this.status = !this.status;
   }
 
@@ -109,9 +111,14 @@ export class UpdateroleComponent implements OnInit {
             canCreate: item.permissions.canCreate,
             canUpdate: item.permissions.canUpdate,
             canDelete: item.permissions.canDelete,
+            onlyMyRecord: item.permissions?.onlyMyRecord ?? false,
+            getById: item.permissions.getById,
             canRead: item.permissions.canRead,
             roleId: response.data.id
           }
+
+          console.log(dto);
+
           this.permissionService.updatePermission( item.id, dto).subscribe({
             next: (response) => {
             }

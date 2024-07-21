@@ -28,7 +28,7 @@ export class AlertService {
     });
   }
 
-  sucessAlert(title: string, message: string, position: AlertPositionInterface = { position: 'center' }, toast: boolean = false, timer: number = 2000): Promise<void> {
+  sucessAlert(title: string, message: string, timer: number = 2000, position: AlertPositionInterface = { position: 'center' }, toast: boolean = false): Promise<void> {
     const sweetAlertPosition: SweetAlertPosition = positionMap[position.position];
 
     return new Promise<void>((resolve) => {

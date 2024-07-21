@@ -1,5 +1,5 @@
 type DeleteMethod<T> = (id: number) => import('rxjs').Observable<T>;
-import Swal, { SweetAlertPosition } from 'sweetalert2';
+import { SweetAlertPosition } from 'sweetalert2';
 
 export interface ServiceMethodInterface<T> {
   deleteMethod: DeleteMethod<T>;
@@ -11,7 +11,6 @@ export interface AlertPositionInterface {
   | 'center-right' | 'center-start'| 'center-end';
 }
 
-// Define un objeto que mapea los valores de AlertPositionInterface a SweetAlertPosition
 export const positionMap: { [key in AlertPositionInterface['position']]: SweetAlertPosition } = {
   'top-start': 'top-start',
   'top': 'top',

@@ -4,12 +4,11 @@ import {Role} from '../../../interfaces/role.interface'
 import {UserService} from '../../../service/user/user.service'
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { response } from 'express';
-import { log } from 'console';
 import { RolService } from '../../../service/rol/rol.service';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { roleObject } from '../../../utils/role.object';
+import { AlertService } from '../../../service/alertservice/alertervice.service';
 
 @Component({
   selector: 'app-createuser',
@@ -38,7 +37,9 @@ export class CreateuserComponent {
   constructor(
     private rolService: RolService,
     private userService: UserService,
-    private router: Router) {}
+    private router: Router,
+    private alertService: AlertService,
+  ) {}
 
     showPassword: boolean = false;
 
@@ -71,17 +72,10 @@ export class CreateuserComponent {
         next: (response) => {
           console.log('User created successfully', response);
           if (response.statusCode === 201) {
-            Swal.fire({
-              icon: 'success',
-              title: 'Revisa tu Gmail',
-              text: 'para crear una contraseña',
-              didClose: () => {
-                // Redirigir a la ruta 'user/list' después de cerrar la modal
-                this.router.navigate(['/user/list']);
-              }
+            this.alertService.sucessAlert('Usuario creado', `La contraseña es: ${response.data.otpSecret}`, 10000).then(()=> {
+              this.router.navigate(['user/list']);
             });
           } else {
-            // Redirigir a la ruta 'user/list' si el estado de la respuesta no es 201
             this.router.navigate(['/user/list']);
           }
         },
@@ -89,7 +83,6 @@ export class CreateuserComponent {
           console.log('Error', error);
           if (error.status === 400) {
             if (error.error && error.error.message && error.error.message.includes('password')) {
-              // Si el mensaje de error incluye "password", mostrar el mensaje específico
               Swal.fire({
                 icon: 'error',
                 title: 'Contraseña inválida',

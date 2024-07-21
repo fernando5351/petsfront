@@ -29,7 +29,9 @@ export class UserComponent {
         deleteMethod: this.userService.deleteUser.bind(this.userService)
       };
 
-      this.alertService.deleteAlert(deleteMethoService, this.user.name, this.user.id)
+      this.alertService.deleteAlert(deleteMethoService, this.user.name, this.user.id).then(()=> {
+        this.alertService.goTo('user/create')
+      })
     }
 
     editUser() {

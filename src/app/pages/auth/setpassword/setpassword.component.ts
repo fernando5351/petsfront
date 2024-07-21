@@ -83,7 +83,11 @@ export class SetPasswordComponent {
         this.router.navigate(['home']);
       },
       error: (error) => {
-        console.log(error);
+        if (error.statusCode === 409) {
+          this.alertService.errorAlert('Error', 'La contraseña ya fue establecida');
+        } else {
+          this.alertService.errorAlert('Error', error.message);
+        }
       }
     })
   }

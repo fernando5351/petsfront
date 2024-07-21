@@ -1,5 +1,4 @@
 import { Role, http } from "./role.interface";
-import {Permission} from './role.permissions.interface'
 
 export interface User {
   id: number;
@@ -8,6 +7,7 @@ export interface User {
   name: string;
   lastname: string;
   roleId: number;
+  otpSecret?: string;
   status: boolean;
   createdAt: Date,
   updatedAt: Date,

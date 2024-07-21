@@ -36,9 +36,7 @@ export class LoginComponent {
     this.authService.login(auth).subscribe({
       next: (response) => {
         this.authService.saveToken(response);
-        this.router.navigateByUrl('not-found', { skipLocationChange: true }).then(() => {
-          this.router.navigate(['home']);
-        });
+        window.location.href = '/home'
       },
       error: (error) => {
         alert(error.message);

@@ -4,6 +4,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { AuthService } from './service/auth/auth.service';
 import { LoadingComponent } from './components/loading/loading.component';
+var $: any;
 
 @Component({
   selector: 'app-root',
@@ -19,7 +20,9 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService
-  ) {}
+  ) {
+    $('.js-example-basic-single').select2();
+  }
 
   ngOnInit() {
     console.log(this.authService.isUserLoggedIn());

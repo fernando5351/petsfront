@@ -70,7 +70,7 @@
                     <div class="switch-order">
                       solamente su usuario
                       <label class="switch">
-                        <input type="checkbox" [checked]="item.permissions.onlyMyRecord ? true: false">
+                        <input type="checkbox" [checked]="item.permissions.onlyMyRecord ? true: false" (change)="toggle('onlyMyRecord', item)">
                         <span class="slider"></span>
                       </label>
                     </div>
@@ -79,7 +79,7 @@
                     <div class="switch-order">
                       Ver por item
                       <label class="switch">
-                        <input type="checkbox" [checked]="item.permissions.getById ? true: false">
+                        <input type="checkbox" [checked]="item.permissions.getById ? true: false" (change)="toggle('getById', item)">
                         <span class="slider"></span>
                       </label>
                     </div>

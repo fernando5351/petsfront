@@ -87,6 +87,7 @@ export class AuthService {
   logOut() {
     this.loading.start();
     this.cookieService.delete('user');
+    window.location.reload();
     this.router.navigateByUrl('rol', { skipLocationChange: true }).then(() => {
       this.router.navigate(['auth/login']);
     });
@@ -98,6 +99,7 @@ export class AuthService {
     if (userCookie) {
       try {
         const storage: auth = JSON.parse(userCookie);
+
         return !!storage.user && !!storage.token;
       } catch (error) {
         console.error('Error al parsear la cookie del usuario:', error);
